@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+  postgres:
+    image: postgres:14.1-alpine
+    hostname: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    ports:
+      - "8083:5432"
+    volumes:
+      - db:/home/andre/Documents/Estudos/Fast API/UserManagement/k8s/postgresql/data
+volumes:
+  db:
+    driver: local
+  #api:
+  #  build: ..
+  #  command: gunicorn main:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:5000
+  #  hostname: api
+  #  ports:
+  #    - "8080:5000"
+  #  links:
+  #    - "postgres:db"
+  #
