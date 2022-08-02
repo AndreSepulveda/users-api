@@ -2,6 +2,8 @@
 
 This is a simple implementation to manage users for a web application using FastAPI.
 
+I've seem PyCharm's FastAPI tutorial and I'm trying to implement something similar by heart, so many things you see here are actually going to be pretty much the same.
+
 ### Software Installation
 
 - [x] [Docker](https://www.docker.com/) - Docker helps developers bring their ideas to life by conquering the complexity of app development.
