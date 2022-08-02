@@ -18,3 +18,6 @@ class User(BaseModel):
 		if value.endswith("@ab-inbev.com"):
 			return value
 		raise ValueError('Invalid ABI e-mail.')
+
+
+# TODO add DisplayUser to show user id
