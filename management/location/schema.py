@@ -1,4 +1,5 @@
 from pydantic import BaseModel, constr, validator
+from pycountry import countries
 
 
 class Country(BaseModel):
@@ -14,7 +15,14 @@ class Country(BaseModel):
 	def validate_zone(value: str):
 		if value in ['naz', 'maz', 'saz', 'eur', 'afr', 'apac']:
 			return value
-		raise ValueError('Invalid zone.')
+		raise ValueError('Invalid zone code.')
+
+	# noinspection PyMethodParameters
+	@validator('country_alpha3')
+	def validate_country_alpha3(value: str):
+		if countries.get(alpha_3=value.lower()):
+			return value
+		raise ValueError('Invalid country alpha3.')
 
 
 class UserCountry(BaseModel):

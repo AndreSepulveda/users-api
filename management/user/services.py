@@ -44,6 +44,7 @@ async def get_user(user_id: int, session: Session) -> Optional[models.User]:
 			status_code=404,
 			detail="The provided user_id could not be found."
 		)
+
 	return user
 
 

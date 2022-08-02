@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from management.db import Base
 
 
-class Countries(Base):
+class Country(Base):
 	__tablename__ = "countries"
 
 	country_alpha3 = Column(String(3), primary_key=True)

@@ -14,8 +14,8 @@ router = APIRouter(
 )
 
 
-@router.post('/', status_code=status.HTTP_201_CREATED, response_model=schema.User)
-async def create_user(request: schema.User, session: Session = Depends(db.get_db)) -> schema.User:
+@router.post('/', status_code=status.HTTP_201_CREATED, response_model=schema.DetailedUser)
+async def create_user(request: schema.User, session: Session = Depends(db.get_db)) -> schema.DetailedUser:
 	"""
 	Create the requested user on database if unregistered email and validations pass.
 	Args:
@@ -32,7 +32,7 @@ async def create_user(request: schema.User, session: Session = Depends(db.get_db
 	if user:
 		raise HTTPException(
 			status_code=400,
-			detail="Email already registered.",
+			detail='Provided email already registered.',
 		)
 
 	new_user = await services.new_user_register(request, session)
@@ -40,8 +40,8 @@ async def create_user(request: schema.User, session: Session = Depends(db.get_db
 	return new_user
 
 
-@router.get('/', response_model=List[schema.User])
-async def get_users(session: Session = Depends(db.get_db)):
+@router.get('/', response_model=List[schema.DetailedUser])
+async def get_users(session: Session = Depends(db.get_db)) -> List[schema.DetailedUser]:
 	"""
 	Return a list of registered users found at the database.
 	Args:
@@ -53,10 +53,10 @@ async def get_users(session: Session = Depends(db.get_db)):
 	return await services.get_users(session)
 
 
-@router.get('/{user_id}', status_code=status.HTTP_200_OK, response_model=schema.User)
-async def get_user(user_id: int, session: Session = Depends(db.get_db)) -> schema.User:
+@router.get('/{user_id}', status_code=status.HTTP_200_OK, response_model=schema.DetailedUser)
+async def get_user(user_id: int, session: Session = Depends(db.get_db)) -> schema.DetailedUser:
 	"""
-
+	Return the user with the specified id.
 	Args:
 		user_id: id number of user to be looked for.
 		session: session object used to interact with database.
@@ -64,10 +64,18 @@ async def get_user(user_id: int, session: Session = Depends(db.get_db)) -> schem
 	Returns:
 		Detailed user object for the provided id.
 	"""
-
 	return await services.get_user(user_id, session)
 
 
 @router.delete('/{user_id}', status_code=status.HTTP_204_NO_CONTENT, response_class=Response)
-async def delete_user(user_id: int, session: Session = Depends(db.get_db)) -> schema.User:
+async def delete_user(user_id: int, session: Session = Depends(db.get_db)) -> Response:
+	"""
+	Remove the user with the specified id.
+	Args:
+		user_id: id number of user to be removed.
+		session: session object used to interact with database.
+
+	Returns:
+		Response object after running remove operation.
+	"""
 	return await services.delete_user(user_id, session)

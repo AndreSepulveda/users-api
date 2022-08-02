@@ -20,4 +20,10 @@ class User(BaseModel):
 		raise ValueError('Invalid ABI e-mail.')
 
 
-# TODO add DisplayUser to show user id
+class DetailedUser(BaseModel):
+	id: int
+	name: constr(min_length=2, max_length=50)
+	email: EmailStr
+
+	class Config:
+		orm_mode = True

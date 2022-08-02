@@ -2,10 +2,10 @@ from typing import Optional
 
 from sqlalchemy.orm import Session
 
-from .models import User
+from . import models
 
 
-async def verify_email_existence(email: str, session: Session) -> Optional[User]:
+async def verify_email_existence(email: str, session: Session) -> Optional[models.User]:
     """
     Verify if the provided email is already registered.
     Args:
@@ -15,4 +15,4 @@ async def verify_email_existence(email: str, session: Session) -> Optional[User]
     Returns:
         User object if email already registered.
     """
-    return session.query(User).filter(User.email == email).first()
+    return session.query(models.User).filter(models.User.email == email).first()
