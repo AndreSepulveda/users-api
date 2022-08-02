@@ -2,7 +2,7 @@
 
 This is a simple implementation to manage users for a web application using FastAPI.
 
-I've seem PyCharm's FastAPI tutorial and I'm trying to implement something similar by heart, so many things you see here are actually going to be pretty much the same.
+I've seen PyCharm's FastAPI tutorial and I'm trying to implement something similar by heart, so many things you'll see here are actually going to be pretty much the same.
 
 ### Software Installation
 
