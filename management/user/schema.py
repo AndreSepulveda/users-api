@@ -1,5 +1,8 @@
+from typing import List
+
 from pydantic import BaseModel, constr, EmailStr, validator
 
+from ..location.schema import UserCountry
 
 # from management import db
 # from . import models
@@ -24,6 +27,7 @@ class DetailedUser(BaseModel):
 	id: int
 	name: constr(min_length=2, max_length=50)
 	email: EmailStr
+	user_countries: List[UserCountry]
 
 	class Config:
 		orm_mode = True

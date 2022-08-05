@@ -1,10 +1,12 @@
 from pydantic import BaseModel, constr, validator
 from pycountry import countries
 
+from ..user import models
+
 
 class Country(BaseModel):
-	country_alpha3: str
-	alpha2: str
+	country_alpha3: constr(min_length=3, max_length=3)
+	alpha2: constr(min_length=2, max_length=2)
 	zone: constr(min_length=3, max_length=4)
 
 	class Config:

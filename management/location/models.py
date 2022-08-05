@@ -10,7 +10,7 @@ class Country(Base):
 	country_alpha3 = Column(String(3), primary_key=True)
 	alpha2 = Column(String(2))
 	zone = Column(String(4))
-	user_country = relationship("Countries", back_populates="country_details")
+	user_country = relationship("UserCountry", back_populates="country_details")
 
 	def __init__(self, country_alpha3, alpha2, zone):
 		self.country_alpha3 = country_alpha3
@@ -25,6 +25,7 @@ class UserCountry(Base):
 	user_id = Column(Integer, ForeignKey("users.id"))
 	country_alpha3 = Column(String, ForeignKey("countries.country_alpha3"))
 	users = relationship("User", back_populates="user_countries")
+	country_details = relationship("Country")
 
 	def __init__(self, user_id, country_alpha3):
 		self.user_id = user_id

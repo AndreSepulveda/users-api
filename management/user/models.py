@@ -10,7 +10,7 @@ class User(Base):
 	id = Column(Integer, primary_key=True, autoincrement=True)
 	name = Column(String(50))
 	email = Column(String(255))
-	user_countries = relationship("UserCountry", back_populates="user_details")
+	user_countries = relationship("UserCountry", back_populates="users")
 
 	def __init__(self, name, email):
 		self.name = name

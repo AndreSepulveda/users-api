@@ -68,7 +68,7 @@ async def get_user(user_id: int, session: Session = Depends(db.get_db)) -> schem
 
 
 @router.delete('/{user_id}', status_code=status.HTTP_204_NO_CONTENT, response_class=Response)
-async def delete_user(user_id: int, session: Session = Depends(db.get_db)) -> Response:
+async def delete_user(user_id: int, session: Session = Depends(db.get_db)) -> None:
 	"""
 	Remove the user with the specified id.
 	Args:

@@ -65,7 +65,7 @@ async def get_users(session: Session) -> List[models.User]:
 	return users
 
 
-async def delete_user(user_id: int, session: Session):
+async def delete_user(user_id: int, session: Session) -> None:
 	"""
 	Remove the user with the provided id from the database.
 	Args:
