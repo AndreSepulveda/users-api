@@ -40,19 +40,6 @@ async def create_user(request: schema.User, session: Session = Depends(db.get_db
 	return new_user
 
 
-@router.get('/', response_model=List[schema.DetailedUser])
-async def get_users(session: Session = Depends(db.get_db)) -> List[schema.DetailedUser]:
-	"""
-	Return a list of registered users found at the database.
-	Args:
-		session: session object used to interact with database.
-
-	Returns:
-		List of registered users found at database.
-	"""
-	return await services.get_users(session)
-
-
 @router.get('/{user_id}', status_code=status.HTTP_200_OK, response_model=schema.DetailedUser)
 async def get_user(user_id: int, session: Session = Depends(db.get_db)) -> schema.DetailedUser:
 	"""
@@ -79,3 +66,16 @@ async def delete_user(user_id: int, session: Session = Depends(db.get_db)) -> No
 		Response object after running remove operation.
 	"""
 	return await services.delete_user(user_id, session)
+
+
+@router.get('/', response_model=List[schema.DetailedUser])
+async def get_users(session: Session = Depends(db.get_db)) -> List[schema.DetailedUser]:
+	"""
+	Return a list of registered users found at the database.
+	Args:
+		session: session object used to interact with database.
+
+	Returns:
+		List of registered users found at database.
+	"""
+	return await services.get_users(session)

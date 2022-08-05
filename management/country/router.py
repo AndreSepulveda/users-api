@@ -4,6 +4,7 @@ from fastapi import APIRouter, Depends, status, HTTPException
 from sqlalchemy.orm import Session
 
 from management import db
+from ..user import services as user_services
 from . import schema
 from . import services
 from . import validators
@@ -81,11 +82,18 @@ async def new_user_country(user_id: int, country_alpha3: str, session: Session =
 	Returns:
 		new user country object after creation.
 	"""
-	user_country = validators.verify_user_country_existence(user_id, country_alpha3, session)
+	if not await validators.verify_country_existence(country_alpha3, session):
+		raise HTTPException(
+			status_code=404,
+			detail='Provided country alpha3 does not exists at database.'
+		)
 
-	if user_country:
+	_ = await user_services.get_user(user_id, session)
+
+	if await validators.verify_user_country_existence(user_id, country_alpha3, session):
 		raise HTTPException(
 			status_code=200,
 			detail='Provided country_alpha3 already present for the user.'
 		)
+
 	return await services.new_user_country(user_id, country_alpha3, session)
