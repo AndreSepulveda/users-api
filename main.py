@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 
 from management.user import router as user_router
-from management.location import router as country_router
+from management.country import router as country_router
 
 app = FastAPI()
 

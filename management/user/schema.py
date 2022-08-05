@@ -2,7 +2,7 @@ from typing import List
 
 from pydantic import BaseModel, constr, EmailStr, validator
 
-from ..location.schema import UserCountry
+from ..country.schema import UserCountry
 
 # from management import db
 # from . import models

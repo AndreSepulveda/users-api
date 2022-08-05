@@ -21,7 +21,7 @@ fileConfig(config.config_file_name)
 from management import config as config_env  # noqa
 from management.db import Base  # noqa
 from management.user.models import User  # noqa
-from management.location.models import Countries, UserCountry # noqa
+from management.country.models import Countries, UserCountry # noqa
 
 target_metadata = Base.metadata
 
